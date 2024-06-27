@@ -72,6 +72,8 @@ def connect_webcam(channel, root):
             frame_rgb = frame_rgb[:, :, 1]
         elif channel == 'blue':
             frame_rgb = frame_rgb[:, :, 2]
+        else:
+            frame_rgb = frame_rgb
 
         # fig - объект фигуры(окно или область, содержащий график), содержащий несколько осей
         # ax - объект оси, область графика куда наносятся данные
@@ -88,11 +90,8 @@ def connect_webcam(channel, root):
         # Выводим изображение в отдельном окне
         plt.show()
 
-        # Конвертируем в BGR для сохранения, поскольку изображение прошло обработку
-        frame_rgb_cv2 = cv2.cvtColor(frame_rgb, cv2.COLOR_RGB2BGR)  
-
         # Сохраняем кадр в указанный файл
-        cv2.imwrite("./pictures/screenshot.jpg", frame_rgb_cv2)
+        cv2.imwrite("./pictures/screenshot.jpg", ax)
         print("Кадр сохранен в корневой папке, под названием: screenshot.jpg")
     except Exception as e:
         print(f"Произошла ошибка создании фотоснимка с камеры: {e}")
